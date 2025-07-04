@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Project</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <div class="container">
+      <div   class="my-4">
+        <h3>Lego</h3>
+        <button class="btn btn-primary mb-3" onclick="onFetchLegoClick()">Fetch</button>
+        <div id="lego-container" >
+      </div>  
+        </div>
+
+
+
+    </div>
+    </div>
+    <script src ="API_Keys.js"></script>
+    <script src ="API_Project.js" async></script>
+
+
+    <button id="myButton">Fetch Data</button>
+<div id="dataDisplay"></div> 
+
+<script>
+    const myButton = document.getElementById('myButton');
+    const dataDisplay = document.getElementById('dataDisplay');
+    console.log ("test")
+    myButton.addEventListener('click', function() {
+        fetch("https://rebrickable.com/api/v3/lego/colors/?page_size=10&key=" + API_Key) // Replace with your actual API endpoint
+            .then(response => response.json())
+            .then(data => {
+                dataDisplay.innerHTML = `<p>${data.title}</p><p>${data.body}</p>`; // Display the data
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                dataDisplay.innerHTML = '<p>Error fetching data.</p>'; // Display an error message
+            });
+    });
+</script>
+
+</body>
+</html>
